@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Nmap and Wireshark Scan Results</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      background-color: #f5f5f5;
+    }
+    h1, h2 {
+      color: #333;
+    }
+    .scan-section {
+      margin-bottom: 40px;
+    }
+    img {
+      width: 80%;
+      max-width: 800px;
+      border: 2px solid #ccc;
+      padding: 5px;
+      background-color: #fff;
+margin-top: 10px;
+    }
+    p {
+      max-width: 800px;
+      line-height: 1.6;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Task 1:Scan your local network for open ports</h1>
+
+  <!-- Nmap Scan Section -->
+  <div class="scan-section">
+    <h2>Nmap Scan</h2>
+    <p>
+      The Nmap scan was conducted to identify open ports and services running on the target device.
+      This helps in understanding the attack surface and checking for potential vulnerabilities.
+      Common services like msrpc(port 135), netbios-ssn (port 139), microsoft-ds(port 445), and mysql(port 3306) were detected.The figure 1 below shows the open ports and ip adresses.
+    </p>
+    <img src="screenshot.png" alt="Nmap Scan Screenshot">
+    <figcaption>Fig1: Scanning ip addresses and open ports in nmap</figcaption>
+  </div>
+
+  <!-- Wireshark Scan Section -->
+  <div class="scan-section">
+    <h2>Wireshark Analysis</h2>
+<p>
+      Wireshark was used to capture and analyze network traffic. The screenshot below shows filtered packets 
+      based on IP and port, helping identify suspicious traffic patterns, unencrypted data transfers, or malware communication.The figure 2 below shows analyzing packet capture with wireshark.
+    </p>
+    <img src="Screenshot 2.png" alt="Wireshark Scan Screenshot">
+    <figcaption>Fig2: Analyzing packet captures in wireshark</figcaption>
+    </p>
+  </div>
+  <table border="1" cellpadding="8" cellspacing="0">
+  <thead>
+    <tr>
+      <th>Port</th>
+      <th>Protocol</th>
+      <th>State</th>
+      <th>Service</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>135</td>
+      <td>TCP</td>
+      <td>Open</td>
+      <td>msrpc</td>
+      <td>Microsoft RPC – Used for Microsoft DCOM services (common in Windows systems).</td>
+    </tr>
+    <tr>
+      <td>139</td>
+      <td>TCP</td>
+      <td>Open</td>
+      <td>netbios-ssn</td>
+      <td>NetBIOS Session Service – Often used for Windows file/printer sharing.</td>
+    </tr>
+    <tr>
+      <td>445</td>
+      <td>TCP</td>
+      <td>Open</td>
+      <td>microsoft-ds</td>
+      <td>Microsoft Directory Services – Used by SMB over TCP (file sharing, AD, etc.).</td>
+    </tr>
+    <tr>
+      <td>3306</td>
+      <td>TCP</td>
+      <td>Open</td>
+      <td>mysql</td>
+      <td>MySQL Database Service – Indicates that a MySQL server is running on the host.</td>
+    </tr>
+    <p>
+        Potential security risks from open ports:<br>
+        1.Unencrypted communication: Since it's Http(not HTTPS),any sensitive data(like messages in chat) is transmitted in plaintext.This could be easily intercepted and read by an attacker on the network.<br>
+        2.Chat or Messaging activity: The repeated POST /chat to port 80 suggests some chat or messaging application is being used by the device,likely communicating with a server.<br>
+        3.Becuase we see HTTP instaed of HTTPS(port443),the session isn't protected by TLS encryption.
+    </p>
+
+  </tbody>
+</table>
+</body>
+</html>
